@@ -1,0 +1,211 @@
+*, *::before,*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0 solid transparent;
+}
+
+.header {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    padding: 20px;
+}
+
+.title {
+    font-size: 2.986rem;
+    font-family: "Zilla Slab";
+    margin-bottom: 16px;
+    margin-top: 24px;
+
+}
+
+.description {
+    font-family: "League Spartan";
+    font-size: 1rem;
+    margin-bottom: 24px;
+    max-width: 750px;
+    min-width: 400px;
+}
+
+.story-button {
+    /* border: solid; */
+    /* border-color: red; */
+    display: flex;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    font-size: 1.44rem;
+    cursor: pointer;
+    font-family: "Zilla Slab";
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: transparent;
+}
+
+.button-icon {
+    margin-right: 4px;
+}
+
+.aussen-boxen-container {
+    max-width: 1060px;
+    margin: 0 auto;
+}
+
+.boxen-container {
+    /* border: solid; */
+    /* border-color: red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 16px;
+    column-gap: 16px;
+}
+
+.boxen-item {
+    /* border: solid; */
+    /* border-color: blue; */
+    width: 315px;
+    height: 235px;
+    border-radius: 24px;
+    margin: 0px;
+}
+
+.boxen-item-test {
+    /* border: solid; */
+    /* border-color: blue; */
+    padding: 16px;
+    margin: 20px;
+    flex-grow: 2;
+}
+
+#box1 {
+    background-color: #DBE6FF;
+}
+#box2 {
+    background-color: #E9D3EF;
+}
+#box3 {
+    background-color: #E0FFD7;
+}
+#box4 {
+    background-color: #FFD0D1;
+}
+#box5 {
+    background-color: #FFF5C4;
+}
+#box6 {
+    background-color: #DBE6FF;
+}
+
+.navigation {
+    font-family: "Zilla Slab";
+    font-size: 1.44rem;
+    /* border: solid; */
+    /* border-color: green; */
+    width: max-content;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    /* background-color: yellow; */
+    /* justify-content: center; */
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+body {
+margin-left: 180px;
+margin-right: 180px;}
+
+
+
+
+/* Media Queries */
+
+/* Smaller devices (690px to 920px) */
+@media only screen and (max-width: 919px) {
+
+    .title {
+        line-height: 0.9;
+        /* margin-top: 24px; */
+        margin-bottom: 24px;
+    }
+    .story-button {
+        min-width: 250px;
+    }
+
+    .boxen-item {
+        /* width: 100%; 1 Box pro Zeile */
+        min-width: 300px;
+        height: 200px;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .story-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.2rem;
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .button-icon {
+        margin-right: 0px;
+        margin-bottom: 4px;
+    }
+    .navigation {
+        display: none;
+    }
+}
+
+/* Small devices (690px to 920px) */
+@media only screen and (min-width: 690px) and (max-width: 920px) {
+    
+    .boxen-item {
+        width: 100%; /* 1 Box pro Zeile */
+        height: 200px;
+    }
+
+    .navigation {
+        display: none;
+    }
+}
+
+/* small but not super small */
+
+@media only screen and (min-width: 921px) and (max-width: 1250px) {
+    .boxen-item {
+        width: calc(50% - 16px); /* 2 Boxen nebeneinander */
+    }
+    .navigation {
+        display: none;
+    }
+}
+
+/* my laptop size*/
+
+@media only screen and (min-width: 1250px) and (max-width: 1400px) {
+    .boxen-item {
+        width: calc(33.33% - 16px); /* 3 Boxen nebeneinander */
+    }
+    .navigation {
+        display: none;
+    }
+}
+
+
+/* Large devices (desktops, 1400px and up) */
+@media only screen and (min-width: 1400px) {
+    .boxen-item {
+        width: calc(33.33% - 16px); /* 3 Boxen nebeneinander */
+    }
+}
