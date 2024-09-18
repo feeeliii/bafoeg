@@ -34,6 +34,7 @@ body {
     width: 3%;
     height: auto;
     opacity: 0.3;
+    display: block;
 }
 
 .description {
@@ -77,6 +78,7 @@ body {
     display: flex;
     align-items: center;
     color: black;
+    display: none;
 }
 
 .grid {
@@ -140,17 +142,14 @@ body {
     .description {
         font-size: 1rem;
     }
-    .menu {
-        display: block;
-    }
 }
 
 
-@media only screen and (max-width: 921px) {
+/* @media only screen and (max-width: 921px) {
     .menu {
         display: block;
     }
-}
+} */
 
 /* @media only screen and (min-width: 922px) {
     .menu {
@@ -161,14 +160,17 @@ body {
 
 /* the rest */
 
-@media only screen and (min-width: 921px) and (max-width: 1400px) {
+/* @media only screen and (min-width: 921px) and (max-width: 1400px) {
     .navigation {
         display: none;
     }
-}
+} */
 
 @media only screen and (min-width: 1400px) {
     .menu {
         display: none;
+    }
+    .navigation {
+        display: block;
     }
 }
