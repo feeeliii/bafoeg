@@ -7,12 +7,40 @@
   padding: 0;
   border: 0 solid transparent;
 }
+.grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(275px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    border: solid;
+    border-color: red;
+    justify-content: center;
+    max-width: calc(3*337px + 2*16px);
+    margin: 0 auto;
+}
+
+.grid > div {
+    border: solid;
+    border-color: blue;
+    height: 210px;
+    border-radius: 24px; 
+}
+
+.grid div:nth-child(5n+1) {background-color: #DBE6FF;}
+.grid div:nth-child(5n+2) {background-color: #E9D3EF ;}
+.grid div:nth-child(5n+3) {background-color: #E0FFD7;}
+.grid div:nth-child(5n+4) {background-color: #FFD0D1;}
+.grid div:nth-child(5n+5) {background-color: #FFF5C4;}
+
+
+
 
 .header {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     padding: 20px;
 }
 
@@ -48,61 +76,6 @@
 
 .button-icon {
     margin-right: 4px;
-}
-
-.aussen-boxen-container {
-    max-width: 1060px;
-    margin: 0 auto;
-}
-
-.boxen-container {
-    /* border: solid; */
-    /* border-color: red; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 16px;
-    column-gap: 16px;
-}
-
-.boxen-item {
-    /* border: solid; */
-    /* border-color: blue; */
-    width: 315px;
-    height: 235px;
-    border-radius: 24px;
-    margin: 0px;
-    font-family: "League Spartan";
-    font-size: 1rem;
-    padding: 16px;
-    padding-bottom: 32px;
-}
-
-.boxen-item-test {
-    /* border: solid; */
-    /* border-color: blue; */
-    padding: 16px;
-    margin: 20px;
-    flex-grow: 2;
-}
-
-#box1 {
-    background-color: #DBE6FF;
-}
-#box2 {
-    background-color: #E9D3EF;
-}
-#box3 {
-    background-color: #E0FFD7;
-}
-#box4 {
-    background-color: #FFD0D1;
-}
-#box5 {
-    background-color: #FFF5C4;
-}
-#box6 {
-    background-color: #DBE6FF;
 }
 
 .navigation {
@@ -161,7 +134,7 @@ margin-right: 180px;}
         padding: 8px;
         margin-bottom: 8px;
     }
-    
+
     .button-icon {
         margin-right: 0px;
         margin-bottom: 4px;
@@ -176,7 +149,7 @@ margin-right: 180px;}
 
 /* Small devices (690px to 920px) */
 @media only screen and (min-width: 690px) and (max-width: 920px) {
-    
+
     .boxen-item {
         width: 100%; /* 1 Box pro Zeile */
         height: 200px;
@@ -200,6 +173,7 @@ margin-right: 180px;}
     .navigation {
         display: none;
     }
+
 }
 
 /* my laptop size*/
