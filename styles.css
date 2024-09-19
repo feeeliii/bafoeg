@@ -113,7 +113,7 @@ body {
 
 /* Media Queries */
 
-/* Small devices (690px to 920px) */
+/* Small devices (up to 920px) */
 @media only screen and (max-width: 920px) {
 
     .title {
@@ -143,6 +143,8 @@ body {
         font-size: 1rem;
     }
 }
+
+/* Big devices (1400px and bigger) */
 
 @media only screen and (min-width: 1400px) {
     .menu {
