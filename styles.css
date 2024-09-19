@@ -144,28 +144,6 @@ body {
     }
 }
 
-
-/* @media only screen and (max-width: 921px) {
-    .menu {
-        display: block;
-    }
-} */
-
-/* @media only screen and (min-width: 922px) {
-    .menu {
-        display: none;
-    }
-} */
-
-
-/* the rest */
-
-/* @media only screen and (min-width: 921px) and (max-width: 1400px) {
-    .navigation {
-        display: none;
-    }
-} */
-
 @media only screen and (min-width: 1400px) {
     .menu {
         display: none;
