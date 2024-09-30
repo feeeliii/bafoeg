@@ -27,9 +27,38 @@ app.get('/about', (request, response) => {
 app.get('/greet', (request, response) => {
     const name = 'Besucher';
     const timeOfDay = 'Abend';
-    response.send(`<p>${name}, Willkommen auf unserer Webseite.</p>`);
+    response.send(`<p>Liebe*r ${name}, Willkommen auf unserer Webseite.</p>`);
 });
 
 
+
+// Routes for Bafög experiences / Bafög Erfahrungen
+
+app.get('/experiences', (request, response) => {
+    response.send('List of all Bafög experiences');
+});
+
+app.post('/experiences', (request, response) => {
+    response.send(`New experience added: ${request.body.text}`);
+});
+
+app.get('/experiences/:slug', (request, response) => {
+    const experienceSlug = request.params.slug;
+    response.send(`Details of experience with slug: ${experienceSlug}`);
+});
+
+// Routes for Bafög demands / Forderungen
+app.get('/demands', (request, response) => {
+    response.send('List of all Bafög demands');
+});
+
+app.post('/demands', (request, response) => {
+    response.send(`New demand added: ${request.body.text}`);
+});
+
+app.get('/demands/:slug', (request, response) => {
+    const demandSlug = request.params.slug;
+    response.send(`Details of demand with slug: ${demandSlug}`);
+});
 
 
