@@ -7,56 +7,30 @@ app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`)
 })
 
+//new
+
 app.get('/', (request, response) => {
-    response.send(`
-        <form action="/submit-story" method="post">
-            <textarea name="story"></textarea>
-            <button type="submit">Geschichte einreichen</button>
-        </form>
-    `)
-})
+    response.send('Liste aller Bafög Geschichten');
+});
 
-app.post('/submit-story', (request, response) => {
-    response.send('Vielen Dank für das Einreichen der Geschichte. Nach einem kurzen Checkup wird deine Geschichte online gehen.')
-})
+app.get('/stories/:id', (request, response) => {
+    const storyId = parseInt(request.params.id, 10);
+    response.send(`Details zu Geschichte ${storyId}`);
+});
 
-app.get('/about', (request, response) => {
-    response.send('Über das Projekt')
-})
-
-app.get('/greet', (request, response) => {
-    const name = 'Besucher';
-    const timeOfDay = 'Abend';
-    response.send(`<p>Liebe*r ${name}, Willkommen auf unserer Webseite.</p>`)
-})
-
-
-
-// Routes for Bafög experiences / Bafög Erfahrungen
-
-app.get('/experiences', (request, response) => {
-    response.send('List of all Bafög experiences')
-})
-
-app.post('/experiences', (request, response) => {
-    response.send(`New experience added: ${request.body.text}`)
-})
-
-app.get('/experiences/:slug', (request, response) => {
-    const experienceSlug = request.params.slug;
-    response.send(`Details of experience with slug: ${experienceSlug}`)
-})
-
-// Routes for Bafög demands / Forderungen
 app.get('/demands', (request, response) => {
-    response.send('List of all Bafög demands')
-})
+  response.send('Liste aller Forderungen:');
+});
 
-app.post('/demands', (request, response) => {
-    response.send(`New demand added: ${request.body.text}`)
-})
+app.get('/demands/:id', (request, response) => {
+  const demandId = parseInt(request.params.id, 10);
+  response.send(`Details zur Forderung mit ID: ${demandId}`);
+});
 
-app.get('/demands/:slug', (request, response) => {
-    const demandSlug = request.params.slug;
-    response.send(`Details of demand with slug: ${demandSlug}`)
-})
+app.get('/project', (request, response) => {
+    response.send('Über das Projekt');
+});
+
+app.get('/privacy', (request, response) => {
+    response.send('Datenschutz');
+});
