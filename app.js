@@ -1,7 +1,10 @@
 import express, { request, response } from 'express'
+import { logger } from './middlewares/logger.js'
 
 const app = express()
 const PORT = 3000
+
+app.use(logger)
 
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`)
@@ -20,6 +23,8 @@ const demands = [
     {id: 1, content: 'bla', author: 'Heiz Heinzel', date: '01.01.2024'},
     {id: 2, content: 'bla', author: 'Berta Bertanius', date: '02.02.2024'}
 ]
+
+//routes
 
 app.get('/', (request, response) => {
     response.send('Liste aller Bafög Geschichten');
