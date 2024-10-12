@@ -5,6 +5,7 @@ const app = express()
 const PORT = 3000
 
 app.use(logger)
+app.use('/assets', express.static('public'))
 
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`)
