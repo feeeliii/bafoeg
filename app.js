@@ -1,8 +1,18 @@
 import express, { request, response } from 'express'
 import { logger } from './middlewares/logger.js'
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get __dirname in ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express()
 const PORT = 3000
+
+// Middleware to parse URL-encoded data (form data)
+app.use(express.urlencoded({ extended: true }));
 
 app.use(logger)
 app.use('/assets', express.static('public'))
@@ -28,8 +38,13 @@ const demands = [
 //routes
 
 app.get('/', (request, response) => {
-    response.send('Liste aller Bafög Geschichten');
+  response.sendFile(path.join(__dirname, 'public', 'mainpage.html'));;
 })
+
+app.post('/stories', (request, response) => {
+  console.log('Contact form submission: ', request.body);
+  response.send('Thank you for your message. We will be in touch soon.');
+});
 
 app.get('/stories/:id', (request, response) => {
     const storyId = parseInt(request.params.id, 10);
@@ -42,7 +57,8 @@ app.get('/stories/:id', (request, response) => {
 })
 
 app.get('/demands', (request, response) => {
-    response.send('Liste aller Forderungen:');
+  //console.log(request.query) Query string try out
+  response.send('Liste aller Forderungen:');
   });
 
 app.get('/demands/:id', (request, response) => {
