@@ -11,12 +11,35 @@ const __dirname = path.dirname(__filename); */
 
 const app = express()
 const PORT = 3000
-mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
-app.set('view engine', 'ejs')
 
-/*mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
+// Schemas and Models
+const storySchema = new mongoose.Schema({
+  userName: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+  content: { type: String, required: true },
+  upvotes: { type: Number, default: 0 },
+  sentiment: { type: String, enum: ['positive', 'negative', 'neutral'], required: true },
+  demandId: { type: mongoose.Schema.Types.ObjectId, ref: 'Demand' }
+});
+
+const Story = mongoose.model('Story', storySchema);
+
+const demandSchema = new mongoose.Schema({
+  userName: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+  content: { type: String, required: true },
+  upvotes: { type: Number, default: 0 },
+  storyId: { type: mongoose.Schema.Types.ObjectId, ref: 'Story' }
+});
+
+const Demand = mongoose.model('Demand', demandSchema);
+
+// Connect to the database
+mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
   .then(() => console.log('💽 Database connected'))
-  .catch(error => console.error(error))*/
+  .catch(error => console.error(error));
+
+app.set('view engine', 'ejs')
 
 // Middleware to parse URL-encoded data (form data)
 app.use(express.urlencoded({ extended: true }));
@@ -30,9 +53,9 @@ app.listen(PORT, () => {
 
 //new
 
-//object for experiences and demands - for testing before database
+//object for stories and demands - for testing before database
 
-const experiences = [
+const stories = [
     {id: 1, content: 'bla', author: 'Heiz Heinzel', date: '01.01.2024'},
     {id: 2, content: 'bla', author: 'Berta Bertanius', date: '02.02.2024'}
 ]
@@ -66,7 +89,7 @@ app.post('/stories', (request, response) => {
 
 app.get('/stories/:id', (request, response) => {
     const storyId = parseInt(request.params.id, 10);
-    const story = experiences.find(exp => exp.id === storyId);
+    const story = stories.find(exp => exp.id === storyId);
     if (story) {
         response.json(story);
     } else {
