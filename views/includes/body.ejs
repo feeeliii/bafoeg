@@ -9,9 +9,16 @@
             <img src="/assets/Group 1.svg" alt = "icon" class="button-icon">
             <%= toDo %></button>
             <form action="<%= formAction %>" method="post">
-                <input type="text" name="<%= inputName %>" placeholder="<%= inputPlaceholder %>" /><br />
-                <input type="text" name="name" placeholder="name" /><br />
-                <button>Send</button>
+                <input type="text" name="userName" placeholder="Name" required /><br />
+            <textarea name="content" placeholder="<%= inputPlaceholder %>" required></textarea><br />
+            <% if (nameOfPage === "Geschichten") { %>
+            <select name="sentiment" required>
+                <option value="positive">Positive</option>
+                <option value="negative">Negative</option>
+                <option value="neutral">Neutral</option>
+            </select><br />
+            <% } %>
+            <button type="submit">Send</button>
             </form>
     </header>
     <main>
