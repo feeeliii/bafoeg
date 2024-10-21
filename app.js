@@ -5,11 +5,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Get __dirname in ES module scope
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/* const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); */
 
 const app = express()
 const PORT = 3000
+app.set('view engine', 'ejs')
 
 // Middleware to parse URL-encoded data (form data)
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,7 @@ app.listen(PORT, () => {
 
 //new
 
-//object for experiences and demands
+//object for experiences and demands - for testing before database
 
 const experiences = [
     {id: 1, content: 'bla', author: 'Heiz Heinzel', date: '01.01.2024'},
@@ -38,8 +39,19 @@ const demands = [
 //routes
 
 app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname, 'public', 'mainpage.html'));;
+  response.render('stories/index', {
+    nameOfPage: "Geschichten",
+    toDo: "Erzähl deine Geschichte!",
+    numberOfStoriesSubmitted: 100,
+    formAction: "/stories",
+    inputName: "story",
+    inputPlaceholder: "Schreibe hier deine Geschichte"
+    })
 })
+
+/* app.get('/', (request, response) => {
+  response.sendFile(path.join(__dirname, 'public', 'mainpage.html'));;
+}) */
 
 app.post('/stories', (request, response) => {
   console.log('Contact form submission: ', request.body);
@@ -52,14 +64,27 @@ app.get('/stories/:id', (request, response) => {
     if (story) {
         response.json(story);
     } else {
-        response.status(404).send('Geschichte nicht gefunden, sorry :(')
+        response
+        .status(404)
+        .send('Geschichte nicht gefunden, sorry :(')
     }
 })
 
 app.get('/demands', (request, response) => {
-  //console.log(request.query) Query string try out
-  response.send('Liste aller Forderungen:');
-  });
+  response.render('demands/index', {
+    nameOfPage: "Forderungen",
+    toDo: "Stelle deine Forderung!",
+    numberOfDemandsSubmitted: 100,
+    formAction: "/demands",
+    inputName: "demand",
+    inputPlaceholder: "Stelle hier deine Forderung"
+    })
+})
+
+app.post('/demands', (request, response) => {
+  console.log('Contact form submission: ', request.body);
+  response.send('Thank you for your message. We will be in touch soon.');
+});
 
 app.get('/demands/:id', (request, response) => {
     const demandId = parseInt(request.params.id, 10);
@@ -67,7 +92,9 @@ app.get('/demands/:id', (request, response) => {
     if (demand) {
       response.json(demand);
     } else {
-      response.status(404).send('Forderung nicht gefunden, sorry :(');
+      response
+      .status(404)
+      .send('Forderung nicht gefunden, sorry :(');
     }
   });
 

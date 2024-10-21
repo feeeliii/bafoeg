@@ -1,0 +1,40 @@
+<body>
+    <header class="header">
+        <h1 class="title">
+            <img src="/assets/menu.svg" alt="menu" class="menu">
+            BAföG <%= nameOfPage %>
+        </h1>
+        <p class="description">In Deutschland lebt ein Drittel der Studierenden unter der Armutsgrenze. Die staatliche Bundesausbildungsförderung (kurz: BAföG) schafft es nicht hinreichend, dieser sozialen Ungerechtigkeit etwas entgegenzusetzen. Im Gegenteil: Aufgrund immer weiter steigender Kosten und einer unzureichenden Förderung wird das Studieren immer schwieriger und für manche unmöglich. Die einen erhalten gar keine Förderung, die anderen zu wenig.<br>Hier erzählen wir unsere Geschichten und wie es besser gehen könnte.</p>
+        <button class="story-button">
+            <img src="/assets/Group 1.svg" alt = "icon" class="button-icon">
+            <%= toDo %></button>
+            <form action="<%= formAction %>" method="post">
+                <input type="text" name="<%= inputName %>" placeholder="<%= inputPlaceholder %>" /><br />
+                <input type="text" name="name" placeholder="name" /><br />
+                <button>Send</button>
+            </form>
+    </header>
+    <main>
+        <nav class="navigation">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="assets/zahlenfakten.html">Zahlen & Fakten</a>
+                </li>
+                <li class="nav-item">
+                    <a href="assets/projekt.html">Das Projekt</a>
+                </li>
+                <li class="nav-item">
+                    <a href="assets/datenschutz.html">Datenschutz</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="grid">
+            <div class="item-1">Bafög sucks sometimes. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis iste voluptatibus repellat, reprehenderit quae delectus est minima odit consectetur quia hic aliquam quos et aliquid atque quaerat.</div>
+            <div class="item-2">2</div>
+            <div class="item-3">3</div>
+            <div class="item-4">4</div>
+            <div class="item-5">5</div>
+            <div class="item-6">6</div>
+        </div>
+    </main>
+</body>
