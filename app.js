@@ -1,5 +1,6 @@
 import express, { request, response } from 'express'
 import { logger } from './middlewares/logger.js'
+import mongoose from 'mongoose';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -10,7 +11,12 @@ const __dirname = path.dirname(__filename); */
 
 const app = express()
 const PORT = 3000
+mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
 app.set('view engine', 'ejs')
+
+/*mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
+  .then(() => console.log('💽 Database connected'))
+  .catch(error => console.error(error))*/
 
 // Middleware to parse URL-encoded data (form data)
 app.use(express.urlencoded({ extended: true }));
