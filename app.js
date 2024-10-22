@@ -28,6 +28,7 @@ const demandSchema = new mongoose.Schema({
 const Demand = mongoose.model('Demand', demandSchema);
 
 // Connect to the database
+
 mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
   .then(() => console.log('💽 Database connected'))
   .catch(error => console.error(error));
@@ -46,16 +47,25 @@ app.listen(PORT, () => {
 
 // Routes
 
-app.get('/', (request, response) => {
-  response.render('stories/index', {
-    nameOfPage: "Geschichten",
-    toDo: "Erzähl deine Geschichte!",
-    numberOfStoriesSubmitted: 100,
-    formAction: "/stories",
-    inputName: "story",
-    inputPlaceholder: "Schreibe hier deine Geschichte"
-  });
+// Home route
+app.get('/', async (request, response) => {
+  try {
+    const stories = await Story.find({}).exec();
+    response.render('stories/index', { 
+      items: stories, 
+      itemType: 'stories', 
+      nameOfPage: 'Geschichten', 
+      toDo: 'Erzähl deine Geschichte!',
+      formAction: '/stories',
+      inputPlaceholder: 'Schreibe hier deine Geschichte'
+    });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
 });
+
+// Create new story
 
 app.post('/stories', async (request, response) => {
   try {
@@ -72,6 +82,27 @@ app.post('/stories', async (request, response) => {
   }
 });
 
+// Get all stories
+
+app.get('/stories', async (request, response) => {
+  try {
+    const stories = await Story.find({}).exec();
+    response.render('stories/index', { 
+      items: stories, 
+      itemType: 'stories', 
+      nameOfPage: 'Geschichten', 
+      toDo: 'Erzähl deine Geschichte!',
+      formAction: '/stories',
+      inputPlaceholder: 'Schreibe hier deine Geschichte'
+    });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
+});
+
+// Get a single story by ID
+
 app.get('/stories/:id', async (request, response) => {
   try {
     const story = await Story.findById(request.params.id);
@@ -86,16 +117,26 @@ app.get('/stories/:id', async (request, response) => {
   }
 });
 
-app.get('/demands', (request, response) => {
-  response.render('demands/index', {
-    nameOfPage: "Forderungen",
-    toDo: "Stelle deine Forderung!",
-    numberOfDemandsSubmitted: 100,
-    formAction: "/demands",
-    inputName: "demand",
-    inputPlaceholder: "Stelle hier deine Forderung"
-  });
+// Get all demands
+
+app.get('/demands', async (request, response) => {
+  try {
+    const demands = await Demand.find({}).exec();
+    response.render('demands/index', { 
+      items: demands, 
+      itemType: 'demands', 
+      nameOfPage: 'Forderungen', 
+      toDo: 'Stelle deine Forderung!',
+      formAction: '/demands',
+      inputPlaceholder: 'Stelle hier deine Forderung'
+    });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
 });
+
+// Create new demand
 
 app.post('/demands', async (request, response) => {
   try {
@@ -110,6 +151,8 @@ app.post('/demands', async (request, response) => {
     response.send('Error: The demand could not be created.');
   }
 });
+
+// Get single demand by ID
 
 app.get('/demands/:id', async (request, response) => {
   try {
@@ -131,4 +174,89 @@ app.get('/project', (request, response) => {
 
 app.get('/privacy', (request, response) => {
   response.send('Datenschutz');
+});
+
+// Edit and delete routes
+
+// for stories
+
+app.get('/stories/:id/edit', async (request, response) => {
+  try {
+    const story = await Story.findById(request.params.id).exec();
+    if (!story) throw new Error('Story not found');
+    response.render('stories/edit', { 
+      story: story,
+      nameOfPage: 'Edit Story',
+     });
+  } catch (error) {
+    console.error(error);
+    response.status(404).send('Die Geschichte wurde leider nicht gefunden.');
+  }
+});
+
+app.post('/stories/:id', async (request, response) => {
+  try {
+    const story = await Story.findByIdAndUpdate(
+      request.params.id,
+      {
+        userName: request.body.userName,
+        content: request.body.content
+      },
+      { new: true }
+    );
+    response.redirect(`/stories/${story._id}`);
+  } catch (error) {
+    console.error(error);
+    response.send('Error: The story could not be updated.');
+  }
+});
+
+app.get('/stories/:id/delete', async (request, response) => {
+  try {
+    await Story.findByIdAndDelete(request.params.id);
+    response.redirect('/stories');
+  } catch (error) {
+    console.error(error);
+    response.send('Error: No story was deleted.');
+  }
+});
+
+// für demands
+
+app.get('/demands/:id/edit', async (request, response) => {
+  try {
+    const demand = await Demand.findById(request.params.id).exec();
+    if (!demand) throw new Error('Demand not found');
+    response.render('demands/edit', { demand: demand });
+  } catch (error) {
+    console.error(error);
+    response.status(404).send('Could not find the demand you\'re looking for.');
+  }
+});
+
+app.post('/demands/:id', async (request, response) => {
+  try {
+    const demand = await Demand.findByIdAndUpdate(
+      request.params.id,
+      {
+        userName: request.body.userName,
+        content: request.body.content
+      },
+      { new: true }
+    );
+    response.redirect(`/demands/${demand._id}`);
+  } catch (error) {
+    console.error(error);
+    response.send('Error: The demand could not be updated.');
+  }
+});
+
+app.get('/demands/:id/delete', async (request, response) => {
+  try {
+    await Demand.findByIdAndDelete(request.params.id);
+    response.redirect('/demands');
+  } catch (error) {
+    console.error(error);
+    response.send('Error: No demand was deleted.');
+  }
 });

@@ -36,12 +36,17 @@
             </ul>
         </nav>
         <div class="grid">
-            <div class="item-1">Bafög sucks sometimes. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis iste voluptatibus repellat, reprehenderit quae delectus est minima odit consectetur quia hic aliquam quos et aliquid atque quaerat.</div>
-            <div class="item-2">2</div>
-            <div class="item-3">3</div>
-            <div class="item-4">4</div>
-            <div class="item-5">5</div>
-            <div class="item-6">6</div>
+            <% items.forEach(item => { %>
+                <div class="grid-item">
+                    <h2><%= item.userName %></h2>
+                    <p><%= item.content %></p>
+                    <p><strong>Date:</strong> <%= item.date.toDateString() %></p>
+                    <p><strong>Upvotes:</strong> <%= item.upvotes %></p>
+                    <a href="/<%= itemType %>/<%= item._id %>">Mehr erfahren</a>
+                    <a href="/<%= itemType %>/<%= item._id %>/edit">Edit</a>
+                    <a href="/<%= itemType %>/<%= item._id %>/delete">Delete</a>
+                </div>
+            <% }) %>
         </div>
     </main>
 </body>
