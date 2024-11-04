@@ -1,7 +1,11 @@
 import express from 'express';
 import { logger } from './middlewares/logger.js';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const dbURI = process.env.MONGODB_URI;
 const app = express();
 const PORT = 3000;
 
@@ -29,11 +33,14 @@ const Demand = mongoose.model('Demand', demandSchema);
 
 // Connect to the database
 
-mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
+/*mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
+  .then(() => console.log('💽 Database connected'))
+  .catch(error => console.error(error));*/
+
+
+mongoose.connect(dbURI)
   .then(() => console.log('💽 Database connected'))
   .catch(error => console.error(error));
-
-app.set('view engine', 'ejs');
 
 // Middleware to parse URL-encoded data (form data)
 app.use(express.urlencoded({ extended: true }));
