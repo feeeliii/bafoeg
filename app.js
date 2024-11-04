@@ -2,6 +2,7 @@ import express from 'express';
 import { logger } from './middlewares/logger.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import * as path from 'path';
 
 dotenv.config();
 
