@@ -32,7 +32,6 @@ const demandSchema = new mongoose.Schema({
 const Demand = mongoose.model('Demand', demandSchema);
 
 // Connect to the database
-
 /*mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
   .then(() => console.log('💽 Database connected'))
   .catch(error => console.error(error));*/
@@ -44,7 +43,7 @@ mongoose.connect(dbURI)
 
 // Middleware to parse URL-encoded data (form data)
 app.use(express.urlencoded({ extended: true }));
-
+app.set('views', path.join(__dirname, 'views'));
 app.use(logger);
 app.use('/assets', express.static('public'));
 
