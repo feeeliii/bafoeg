@@ -7,7 +7,7 @@ dotenv.config();
 
 const dbURI = process.env.MONGODB_URI;
 const app = express();
-const PORT = 3000;
+const PORT = 10000;
 
 // Schemas and Models
 const storySchema = new mongoose.Schema({
