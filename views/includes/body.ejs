@@ -2,25 +2,34 @@
     <header class="header">
         <h1 class="title">
             <img src="/assets/menu.svg" alt="menu" class="menu">
-            BAföG <%= nameOfPage %>
+            BAföG
+            <a href="/stories" class="<%= nameOfPage === 'Geschichten' ? 'active' : 'inactive' %>">Geschichten</a> /
+            <a href="/demands" class="<%= nameOfPage === 'Forderungen' ? 'active' : 'inactive' %>">Forderungen</a>
         </h1>
         <p class="description">In Deutschland lebt ein Drittel der Studierenden unter der Armutsgrenze. Die staatliche Bundesausbildungsförderung (kurz: BAföG) schafft es nicht hinreichend, dieser sozialen Ungerechtigkeit etwas entgegenzusetzen. Im Gegenteil: Aufgrund immer weiter steigender Kosten und einer unzureichenden Förderung wird das Studieren immer schwieriger und für manche unmöglich. Die einen erhalten gar keine Förderung, die anderen zu wenig.<br>Hier erzählen wir unsere Geschichten und wie es besser gehen könnte.</p>
-        <button class="story-button">
-            <img src="/assets/Group 1.svg" alt = "icon" class="button-icon">
-            <%= toDo %></button>
-            <form action="<%= formAction %>" method="post">
-                <input type="text" name="userName" placeholder="Name" required /><br />
+    </header>
+
+    <div class="story-button-container">
+        <button class="story-button" id="storyButton">
+            <img src="/assets/Group 1.svg" alt="icon" class="button-icon">
+            <%= toDo %>
+        </button>
+    </div>
+
+    <div class="form-container" id="formContainer" style="display:none;">
+        <form id="storyForm" action="/stories" method="POST">
+            <input type="text" name="userName" placeholder="Name" required /><br />
             <textarea name="content" placeholder="<%= inputPlaceholder %>" required></textarea><br />
             <% if (nameOfPage === "Geschichten") { %>
-            <select name="sentiment" required>
-                <option value="positive">Positive</option>
-                <option value="negative">Negative</option>
-                <option value="neutral">Neutral</option>
-            </select><br />
+                <select name="sentiment" required>
+                    <option value="positive">Positive</option>
+                    <option value="negative">Negative</option>
+                </select><br />
             <% } %>
             <button type="submit">Send</button>
-            </form>
-    </header>
+        </form>
+    </div>
+
     <main>
         <nav class="navigation">
             <ul class="nav-list">
@@ -49,4 +58,15 @@
             <% }) %>
         </div>
     </main>
+
+    <script>
+        document.getElementById('storyButton').addEventListener('click', function() {
+            var formContainer = document.getElementById('formContainer');
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+        });
+    </script>
 </body>

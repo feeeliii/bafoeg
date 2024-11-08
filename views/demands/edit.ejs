@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../includes/head', {title: "Edit Story"}) %>
+<%- include('../includes/head', {title: "Edit Demand"}) %>
 <body>
   <main>
-    <h2>Edit Story</h2>
-    <form action="/stories/<%= story._id %>" method="POST">
-      <input type="text" value="<%= story.userName %>" name="userName" placeholder="Name" required /><br />
-      <textarea name="content" placeholder="Content" required><%= story.content %></textarea><br />
+    <h2>Edit Demand</h2>
+    <form action="/demands/<%= demand._id %>" method="POST">
+      <input type="text" value="<%= demand.userName %>" name="userName" placeholder="Name" required /><br />
+      <textarea name="content" placeholder="Content" required><%= demand.content %></textarea><br />
       <button>Save</button>
     </form>
   </main>

@@ -16,7 +16,7 @@ const storySchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   content: { type: String, required: true },
   upvotes: { type: Number, default: 0 },
-  sentiment: { type: String, enum: ['positive', 'negative', 'neutral'], required: true },
+  sentiment: { type: String, enum: ['positive', 'negative'], required: true },
   demandId: { type: mongoose.Schema.Types.ObjectId, ref: 'Demand' }
 });
 
@@ -31,12 +31,6 @@ const demandSchema = new mongoose.Schema({
 });
 
 const Demand = mongoose.model('Demand', demandSchema);
-
-// Connect to the database
-/*mongoose.connect('mongodb://127.0.0.1:27017/bafoeg')
-  .then(() => console.log('💽 Database connected'))
-  .catch(error => console.error(error));*/
-
 
 mongoose.connect(dbURI)
   .then(() => console.log('💽 Database connected'))
@@ -55,25 +49,10 @@ app.listen(PORT, () => {
 
 // Routes
 
-// Home route
-app.get('/', async (request, response) => {
-  try {
-    const stories = await Story.find({}).exec();
-    response.render('stories/index', { 
-      items: stories, 
-      itemType: 'stories', 
-      nameOfPage: 'Geschichten', 
-      toDo: 'Erzähl deine Geschichte!',
-      formAction: '/stories',
-      inputPlaceholder: 'Schreibe hier deine Geschichte'
-    });
-  } catch (error) {
-    console.error(error);
-    response.status(500).send('Server error');
-  }
-});
-
-// Create new story
+// Home route - Redirect to /stories
+app.get('/', (request, response) => {
+  response.redirect('/stories');
+})
 
 app.post('/stories', async (request, response) => {
   try {
@@ -83,12 +62,13 @@ app.post('/stories', async (request, response) => {
       sentiment: request.body.sentiment
     });
     await story.save();
-    response.send('Story created');
+    response.redirect('/stories');
   } catch (error) {
     console.error(error);
     response.send('Error: Story could not be created');
   }
 });
+
 
 // Get all stories
 
@@ -107,7 +87,7 @@ app.get('/stories', async (request, response) => {
     console.error(error);
     response.status(500).send('Server error');
   }
-});
+})
 
 // Get a single story by ID
 
