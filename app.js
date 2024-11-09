@@ -126,6 +126,7 @@ app.get('/demands', async (request, response) => {
 
 // Create new demand
 
+// Create new demand
 app.post('/demands', async (request, response) => {
   try {
     const demand = new Demand({
@@ -133,7 +134,7 @@ app.post('/demands', async (request, response) => {
       content: request.body.content
     });
     await demand.save();
-    response.send('Demand Created');
+    response.redirect('/demands');
   } catch (error) {
     console.error(error);
     response.send('Error: The demand could not be created.');
@@ -215,12 +216,17 @@ app.get('/demands/:id/edit', async (request, response) => {
   try {
     const demand = await Demand.findById(request.params.id).exec();
     if (!demand) throw new Error('Demand not found');
-    response.render('demands/edit', { demand: demand });
+    response.render('demands/edit', { 
+      demand: demand,
+      nameOfPage: 'Edit Demand'
+     });
   } catch (error) {
     console.error(error);
     response.status(404).send('Could not find the demand you\'re looking for.');
   }
 });
+
+
 
 app.post('/demands/:id', async (request, response) => {
   try {

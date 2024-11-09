@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-container" id="formContainer" style="display:none;">
-        <form id="storyForm" action="/stories" method="POST">
+        <form id="storyForm" action="<%= nameOfPage === 'Geschichten' ? '/stories' : '/demands' %>" method="POST">
             <input type="text" name="userName" placeholder="Name" required /><br />
             <textarea name="content" placeholder="<%= inputPlaceholder %>" required></textarea><br />
             <% if (nameOfPage === "Geschichten") { %>
