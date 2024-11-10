@@ -157,13 +157,35 @@ app.get('/demands/:id', async (request, response) => {
   }
 });
 
+// Others
+app.get('/facts', (request, response) => {
+  try {
+    response.render('facts/index', { nameOfPage: 'Zahlen & Fakten' });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
+});
+
 app.get('/project', (request, response) => {
-  response.send('Über das Projekt');
+  try {
+    response.render('project/index', { nameOfPage: 'Über das Projekt' });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
 });
 
 app.get('/privacy', (request, response) => {
-  response.send('Datenschutz');
+  try {
+    response.render('privacy/index', { nameOfPage: 'Datenschutz' });
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Server error');
+  }
 });
+
+
 
 // Edit and delete routes
 

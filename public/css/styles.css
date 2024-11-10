@@ -56,12 +56,13 @@ body {
     height: auto;
     opacity: 0.3;
     display: block;
+    cursor: pointer;
 }
 
 .description {
     font-family: "League Spartan";
     font-size: 1.2rem;
-    margin-bottom: 32px;
+    margin-bottom: 0%;
     max-width: 750px;
     min-width: 400px;
     cursor: default;
@@ -73,7 +74,7 @@ body {
 .story-button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 .story-button {

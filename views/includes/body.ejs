@@ -1,7 +1,7 @@
 <body>
     <header class="header">
         <h1 class="title">
-            <img src="/assets/menu.svg" alt="menu" class="menu">
+            <img src="/assets/menu.svg" alt="menu" class="menu" id="menuIcon">
             BAföG
             <a href="/stories" class="<%= nameOfPage === 'Geschichten' ? 'active' : 'inactive' %>">Geschichten</a> /
             <a href="/demands" class="<%= nameOfPage === 'Forderungen' ? 'active' : 'inactive' %>">Forderungen</a>
@@ -34,13 +34,13 @@
         <nav class="navigation">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="assets/zahlenfakten.html">Zahlen & Fakten</a>
+                    <a href="/facts">Zahlen & Fakten</a>
                 </li>
                 <li class="nav-item">
-                    <a href="assets/projekt.html">Das Projekt</a>
+                    <a href="/project">Das Projekt</a>
                 </li>
                 <li class="nav-item">
-                    <a href="assets/datenschutz.html">Datenschutz</a>
+                    <a href="/privacy">Datenschutz</a>
                 </li>
             </ul>
         </nav>
@@ -60,6 +60,15 @@
     </main>
 
     <script>
+        document.getElementById('menuIcon').addEventListener('click', function() {
+            var menu = document.getElementById('hamburgerMenu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        });
+    
         document.getElementById('storyButton').addEventListener('click', function() {
             var formContainer = document.getElementById('formContainer');
             if (formContainer.style.display === 'none' || formContainer.style.display === '') {
@@ -69,4 +78,3 @@
             }
         });
     </script>
-</body>
