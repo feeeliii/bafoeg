@@ -21,6 +21,7 @@ router.get('/', async (request, response) => {
     }
 });
 
+// Create story
 router.post('/', async (request, response) => {
     try {
         const story = new Story({
@@ -66,6 +67,7 @@ router.get('/:id/edit', async (request, response) => {
     }
 });
 
+// Update story
 router.post('/:id', async (request, response) => {
     try {
         const story = await Story.findByIdAndUpdate(
