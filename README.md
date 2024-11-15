@@ -25,12 +25,6 @@ The things you need before installing the software.
    git clone https://github.com/feeeliii/bafoeg.git
    cd bafoeg
 
-2. Install the dependencies:```bash
- npm install
+    Install the dependencies:
+npm install
 
-3. Create a `.env` file in the root directory and add your MongoDB URI and port number:
-MONGODB_URI=your_mongodb_uri
-PORT=your_port_number
-
-4. Start the server:
-npm start
