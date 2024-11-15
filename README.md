@@ -23,7 +23,7 @@ The things you need before installing the software.
 1. First, clone the repository:
 ```bash
    git clone https://github.com/feeeliii/bafoeg.git
-   cd bafoeg
+   cd bafoeg```
 
 2. Install the dependencies:
 
