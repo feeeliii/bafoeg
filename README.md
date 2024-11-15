@@ -27,18 +27,20 @@ The things you need before installing the software.
 ```
 
 2. Install the dependencies:
+
 ```bash
-npm install
+   npm i
 ```
 
-3. Create a .env file in the root directory and add your MongoDB URI and port number:
+3. Add local variables to local .env (Ask Feli for the MongoURI Variable)
 ```bash
-MONGODB_URI=your_mongodb_uri
-PORT=your_port_number
+   MONGODB_URI="MongoURI"
+   PORT=3000
 ```
 
-4. Finally, start the server:
+4. Run the application on development mode
+
 ```bash
-npm start
-```
+   npm run dev
+``
 
