@@ -27,4 +27,18 @@ The things you need before installing the software.
 ```
 
 2. Install the dependencies:
+```bash
+npm install
+```
+
+3. Create a .env file in the root directory and add your MongoDB URI and port number:
+```bash
+MONGODB_URI=your_mongodb_uri
+PORT=your_port_number
+```
+
+4. Finally, start the server:
+```bash
+npm start
+```
 
