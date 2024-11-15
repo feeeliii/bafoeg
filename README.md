@@ -1,8 +1,36 @@
 # Bafög Geschichten
-This is a website to tell others about your experiences with BAfÖG. You can also write demands about how to make BAföG better.
-If you want to rant about how bad BAföG works, here is your spot.
+
+This is a website to tell others about your experiences with BAfÖG. You can also write demands about how to make BAföG better. If you want to rant about how bad BAföG works, here is your spot.
 
 This is a Node.js application built with Express.js that connects to a MongoDB database.
 
-# Deployed version:
-Go to: https://bafoeg.onrender.com/
+## Deployed Version
+
+Go to: [https://bafoeg.onrender.com/](https://bafoeg.onrender.com/)
+
+## Prerequisites
+
+The things you need before installing the software.
+
+- Node.js installed on your machine
+- MongoDB database (local or remote)
+- A `.env` file with the following environment variables:
+  - `MONGODB_URI`: Your MongoDB connection string
+  - `PORT`: The port number on which the server will run
+
+## Installation
+
+1. First, clone the repository:
+```bash
+   git clone https://github.com/feeeliii/bafoeg.git
+   cd bafoeg
+
+2. Install the dependencies:
+npm install
+
+3. Create a `.env` file in the root directory and add your MongoDB URI and port number:
+MONGODB_URI=your_mongodb_uri
+PORT=your_port_number
+
+4. Start the server:
+npm start
