@@ -25,6 +25,5 @@ The things you need before installing the software.
    git clone https://github.com/feeeliii/bafoeg.git
    cd bafoeg
 
-    Install the dependencies:
-npm install
+2. Install the dependencies:
 
