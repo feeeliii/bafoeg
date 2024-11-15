@@ -42,5 +42,5 @@ The things you need before installing the software.
 
 ```bash
    npm run dev
-``
+```
 
