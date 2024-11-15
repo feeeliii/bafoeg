@@ -32,7 +32,7 @@ The things you need before installing the software.
    npm i
 ```
 
-3. Add local variables to local .env (Ask Feli for the MongoURI Variable)
+3. Add local variables to local .env (Ask Feli for the MongoURI Variable or take your own one)
 ```bash
    MONGODB_URI="MongoURI"
    PORT=3000
