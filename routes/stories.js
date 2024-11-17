@@ -9,7 +9,7 @@ router.get('/', async (request, response) => {
         const stories = await Story.find({}).exec();
         response.render('stories/index', { 
             items: stories, 
-            itemType: 'stories', 
+            itemType: 'story', 
             nameOfPage: 'Geschichten', 
             toDo: 'Erzähl deine Geschichte!',
             formAction: '/stories',
