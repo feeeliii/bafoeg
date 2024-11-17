@@ -5,7 +5,7 @@ import Demand from '../models/Demand.js';
 
 const router = express.Router();
 
-router.post('/upvote/demand/:id', async (req, res) => {
+router.post('/upvote/demands/:id', async (req, res) => {
     console.log(`Upvoting demand with ID: ${req.params.id}`);
     try {
         const demand = await Demand.findById(req.params.id);
@@ -24,7 +24,7 @@ router.post('/upvote/demand/:id', async (req, res) => {
 //upvoting for stories
 import Story from '../models/Story.js';
 
-router.post('/upvote/story/:id', async (req, res) => {
+router.post('/upvote/stories/:id', async (req, res) => {
     console.log(`Upvoting demand with ID: ${req.params.id}`);
     try {
         const story = await Story.findById(req.params.id);
