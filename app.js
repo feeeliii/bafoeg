@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(path.resolve(), 'views'));
 app.use(logger);
-app.use('/assets', express.static('public'));
+app.use('/public', express.static('public'));
 
 //Home route
 app.get('/', (request, response) => {

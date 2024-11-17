@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:css": "npx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css --watch",
+    "feli-dev": "concurrently \"npm run dev\" \"npm run dev:css\""
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +21,8 @@
     "mongoose": "^8.8.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7",
+    "tailwindcss": "^3.4.15"
   }
 }
