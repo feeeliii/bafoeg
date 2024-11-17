@@ -9,7 +9,7 @@ router.get('/', async (request, response) => {
         const demands = await Demand.find({}).exec();
         response.render('demands/index', { 
             items: demands, 
-            itemType: 'demands', 
+            itemType: 'demand', 
             nameOfPage: 'Forderungen', 
             toDo: 'Stelle deine Forderung!',
             formAction: '/demands',

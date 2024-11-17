@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import * as path from 'path';
 
-// import routers
+// import routes
 import storyRoutes from './routes/stories.js';
 import demandRoutes from './routes/demands.js';
 import otherRoutes from './routes/others.js';
+import upvoteRoutes from './routes/upvote.js'
 
 dotenv.config();
 
@@ -31,10 +32,11 @@ app.get('/', (request, response) => {
   response.redirect('/stories');
 });
 
-// Use router
+// Use routes
 app.use('/stories', storyRoutes);
 app.use('/demands', demandRoutes)
 app.use('/', otherRoutes)
+app.use('/', upvoteRoutes)
 
 app.listen(PORT, () => {
   console.log(`👋 Started server on port ${PORT}`);

@@ -50,7 +50,8 @@
                     <h2><%= item.userName %></h2>
                     <p><%= item.content %></p>
                     <p><strong>Date:</strong> <%= item.date.toDateString() %></p>
-                    <p><strong>Upvotes:</strong> <%= item.upvotes %></p>
+                    <p><strong>Upvotes:</strong> <span id="vote-count-<%= item._id %>"><%= item.upvotes %></span></p>
+                    <button class="upvote-button" data-id="<%= item._id %>">Upvote</button>
                     <a href="/<%= itemType %>/<%= item._id %>">Mehr erfahren</a>
                     <a href="/<%= itemType %>/<%= item._id %>/edit">Edit</a>
                     <a href="/<%= itemType %>/<%= item._id %>/delete">Delete</a>
@@ -59,7 +60,8 @@
         </div>
     </main>
 
-    <script>  
+    <script>
+        // Toggle form visibility
         document.getElementById('storyButton').addEventListener('click', function() {
             var formContainer = document.getElementById('formContainer');
             if (formContainer.style.display === 'none' || formContainer.style.display === '') {
@@ -67,5 +69,20 @@
             } else {
                 formContainer.style.display = 'none';
             }
+        });
+
+        // Handle upvotes
+        document.querySelectorAll('.upvote-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-id');
+            const itemType = '<%= itemType %>'; // 'stories' or 'demands'
+            
+            fetch(`/upvote/${itemType}/${itemId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById(`vote-count-${itemId}`).textContent = data.newVoteCount;
+                })
+                .catch(error => console.error('Error:', error));
+             });
         });
     </script>
