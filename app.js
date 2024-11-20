@@ -8,7 +8,8 @@ import * as path from 'path';
 import storyRoutes from './routes/stories.js';
 import demandRoutes from './routes/demands.js';
 import otherRoutes from './routes/others.js';
-import upvoteRoutes from './routes/upvote.js'
+import upvoteRoutes from './routes/upvote.js';
+import profileRoutes from './routes/profiles.js';
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(path.resolve(), 'views'));
 app.use(logger);
 app.use('/public', express.static('public'));
+app.use('/profiles', profileRoutes);
+app.use(express.json());
 
 //Home route
 app.get('/', (request, response) => {
