@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { response } from 'express';
 import Demand from '../models/Demand.js';
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -22,19 +23,47 @@ router.get('/', async (request, response) => {
 });
 
 // Create new demand
+// router.post('/', async (request, response) => {
+//     try {
+//         const demand = new Demand({
+//             userName: request.body.userName,
+//             content: request.body.content
+//         });
+//         await demand.save();
+//         response.redirect('/demands');
+//     } catch (error) {
+//         console.error(error);
+//         response.send('Error: The demand could not be created.');
+//     }
+// });
+
+
+//Create new demand
 router.post('/', async (request, response) => {
     try {
-        const demand = new Demand({
-            userName: request.body.userName,
-            content: request.body.content
+        const { userId, content } = request.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return response.status(400).json({ error: 'User not found'});
+        }
+
+        const demand = new Demand ({
+            user: user._id,
+            content: content
         });
-        await demand.save();
+
+        const savedDemand = await demand.save();
+        user.forderungen = user.forderungen.concat(savedDemand._id);
+        await user.save();
+
         response.redirect('/demands');
+
     } catch (error) {
         console.error(error);
-        response.send('Error: The demand could not be created.');
+        response.status(500).send('Error: The demand could not be created');
     }
-});
+})
 
 // Get single demand by ID
 router.get('/:id', async (request, response) => {

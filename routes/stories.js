@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { response } from 'express';
 import Story from '../models/Story.js';
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -22,20 +23,47 @@ router.get('/', async (request, response) => {
 });
 
 // Create story
+// router.post('/', async (request, response) => {
+//     try {
+//         const story = new Story({
+//             userName: request.body.userName,
+//             content: request.body.content,
+//             sentiment: request.body.sentiment
+//         });
+//         await story.save();
+//         response.redirect('/stories');
+//     } catch (error) {
+//         console.error(error);
+//         response.send('Error: Story could not be created');
+//     }
+// });
+
 router.post('/', async (request, response) => {
     try {
+        const { userId, content, sentiment } = request.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return response.status(400).json({ error: 'User not found'});
+        }
+
         const story = new Story({
-            userName: request.body.userName,
-            content: request.body.content,
-            sentiment: request.body.sentiment
+            user: user._id,
+            content: content,
+            sentiment: sentiment
         });
-        await story.save();
+
+        const savedStory = await story.save();
+        user.geschichten = user.geschichten.concat(savedStory._id);
+        await user.save();
+
         response.redirect('/stories');
     } catch (error) {
         console.error(error);
-        response.send('Error: Story could not be created');
+        response.status(500).send('Error: Story could not be created.');
     }
-});
+})
+
 
 // Get a single story by ID
 router.get('/:id', async (request, response) => {
